@@ -78,7 +78,7 @@ download_release() {
   esac
 
   # TODO: Adapt the release URL convention for fossa
-  url="$GH_REPO/releases/download/${name}.zip"
+  url="$GH_REPO/releases/download/v${version}/${name}.zip"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"

@@ -80,6 +80,7 @@ download_release() {
   # TODO: Adapt the release URL convention for fossa
   url="$GH_REPO/releases/download/v${version}/${name}.zip"
 
+  echo "WARNING! asdf-fossa is not supported or maintained by FOSSA. Use at your own risk."
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
 }
@@ -92,6 +93,7 @@ install_version() {
   if [ "$install_type" != "version" ]; then
     fail "asdf-$TOOL_NAME supports release installs only"
   fi
+
 
   (
     mkdir -p "$install_path/bin"

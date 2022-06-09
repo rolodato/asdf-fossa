@@ -5,13 +5,14 @@
 
 [fossa](https://github.com/fossas/fossa-cli/blob/master/docs/README.md) plugin for the [asdf version manager](https://asdf-vm.com).
 
+> ⚠️ This plugin is not supported or maintained by FOSSA. Refer to the [fossa-cli documentation for supported installation instructions](https://github.com/fossas/fossa-cli).
+
 </div>
 
 # Contents
 
 - [Dependencies](#dependencies)
 - [Install](#install)
-- [Why?](#why)
 - [Contributing](#contributing)
 - [License](#license)
 

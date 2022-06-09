@@ -36,13 +36,49 @@ list_all_versions() {
   list_github_tags
 }
 
+
+uname_arch() {
+  arch=$(uname -m)
+  case $arch in
+    x86_64) arch="amd64" ;;
+    arm64) arch="arm64" ;;
+    x86) arch="386" ;;
+    i686) arch="386" ;;
+    i386) arch="386" ;;
+    aarch64) arch="arm64" ;;
+    armv5*) arch="armv5" ;;
+    armv6*) arch="armv6" ;;
+    armv7*) arch="armv7" ;;
+  esac
+  echo ${arch}
+}
+
+uname_os() {
+  os=$(uname -s | tr '[:upper:]' '[:lower:]')
+  case "$os" in
+    msys_nt) os="windows" ;;
+  esac
+  echo "$os"
+}
+
 download_release() {
   local version filename url
   version="$1"
   filename="$2"
+  arch=$(uname_arch)
+  os=$(uname_os)
+  platform="${os}/${arch}"
+
+  name=${TOOL_NAME}_${version}_${os}_${arch}
+  case ${platform} in
+    darwin/arm64)
+      log_info "Platform ${platform} (m1 silicon) detected, using compatible darwin/amd64 binary instead."
+      name=${TOOL_NAME}_${version}_${os}_amd64
+      ;;
+  esac
 
   # TODO: Adapt the release URL convention for fossa
-  url="$GH_REPO/archive/v${version}.tar.gz"
+  url="$GH_REPO/releases/download/${name}.zip"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"

@@ -72,7 +72,7 @@ download_release() {
   name=${TOOL_NAME}_${version}_${os}_${arch}
   case ${platform} in
     darwin/arm64)
-      log_info "Platform ${platform} (m1 silicon) detected, using compatible darwin/amd64 binary instead."
+      echo "Platform ${platform} (m1 silicon) detected, using compatible darwin/amd64 binary instead."
       name=${TOOL_NAME}_${version}_${os}_amd64
       ;;
   esac
